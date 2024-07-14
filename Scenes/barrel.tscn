@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cckqe05xsqxpe"]
+
+[ext_resource type="Script" path="res://Scripts/barrel.gd" id="1_n878u"]
+[ext_resource type="Texture2D" uid="uid://deb2crknx7an8" path="res://Assets/Fisherman Assets/3 Objects/Fishbarrel4.png" id="1_q0yhd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x36ec"]
+atlas = ExtResource("1_q0yhd")
+region = Rect2(0, 0, 22, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rbu78"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x36ec")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wipqu"]
+
+[node name="Barrel" type="Area2D"]
+script = ExtResource("1_n878u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rbu78")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_wipqu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
